@@ -19,20 +19,36 @@
   if (!canvas || !canvas.getContext || !canvas.getContext('2d'))
     alert("You must use a browser that supports HTML5 Canvas to run this game.");
 
-  var context = $('#canvas')[0].getContext('2d');
+  function start() {
+    new DerpyBird.Controller();
+  }
 
-  var birdOne = new Image();
-  birdOne.src = "images/DerpyBird.png";
-  birdOne.onload = function() {
-    context.drawImage(birdOne, 75, 170);
+  var DerpyBird = {};
+
+  DerpyBird.Controller = function() {
+    this.drawBirdOne();
+    this.drawBirdTwo();
   };
 
-  var birdTwo = new Image();
-  birdTwo.src = "images/DerpyBird2.png";
-  birdTwo.onload = function() {
-    context.drawImage(birdTwo, 875, 170);
+  DerpyBird.Controller.prototype.drawBirdOne = function() {
+    var context = $('#canvas')[0].getContext('2d');
+    var birdOne = new Image();
+    birdOne.src = "images/DerpyBird.png";
+    birdOne.onload = function() {
+      context.drawImage(birdOne, 75, 170);
+    }; 
   };
 
+  DerpyBird.Controller.prototype.drawBirdTwo = function() {
+    var context = $('#canvas')[0].getContext('2d');
+    var birdTwo = new Image();
+    birdTwo.src = "images/DerpyBird2.png";
+    birdTwo.onload = function() {
+      context.drawImage(birdTwo, 875, 170);
+    };
+  };
+
+  start();
 
 </script>
 </body>
