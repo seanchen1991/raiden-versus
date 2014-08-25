@@ -13,25 +13,25 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > DerpyBird Versus Mode. (Loosely) Inspired By FlappyBird.
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > FlappyBird meets RaidenX with a competitve twist!
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > A competitive multiplayer twist on FlappyBird!
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > No longer will you ever have to play FlappyBird by yourself!
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > Two player FlappyBird implemented mainly using Firebase.
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Both players press the spacebar!
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
