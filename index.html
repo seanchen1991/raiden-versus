@@ -1,11 +1,12 @@
 <html>
 <head>
+  <script src="src/DerpyBird.js"></script>
   <script src="https://cdn.firebase.com/js/client/1.0.15/firebase.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
-<body class="tetris-body example-base">
+<body class="bird-body example-base">
   <div>
     <canvas id="canvas" width="1000" height="600"></canvas>
   </div>
@@ -23,14 +24,22 @@
     new DerpyBird.Controller();
   }
 
-  var DerpyBird = {};
-
   DerpyBird.Controller = function() {
+    new DerpyBird.BirdOne();
+    new DerpyBird.BirdTwo();
+  };
+
+  DerpyBird.BirdOne = function() {
+    new DerpyBird();
     this.drawBirdOne();
+  };
+
+  DerpyBird.BirdTwo = function() {
+    new DerpyBird();
     this.drawBirdTwo();
   };
 
-  DerpyBird.Controller.prototype.drawBirdOne = function() {
+  DerpyBird.BirdOne.prototype.drawBirdOne = function() {
     var context = $('#canvas')[0].getContext('2d');
     var birdOne = new Image();
     birdOne.src = "images/DerpyBird.png";
@@ -39,7 +48,7 @@
     }; 
   };
 
-  DerpyBird.Controller.prototype.drawBirdTwo = function() {
+  DerpyBird.BirdTwo.prototype.drawBirdTwo = function() {
     var context = $('#canvas')[0].getContext('2d');
     var birdTwo = new Image();
     birdTwo.src = "images/DerpyBird2.png";
