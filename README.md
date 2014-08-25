@@ -1,5 +1,5 @@
-# Project Name #
-
+# DerpyBird Versus Mode! #
+  
 <!-- 
 
 There is an approach called "working backwards" that is widely used at Amazon. They work backwards from the customer, rather than starting with an idea for a product and trying to bolt customers onto it. While working backwards can be applied to any specific product decision, using this approach is especially important when developing new products or features.
@@ -13,10 +13,10 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
  -->
  
 ## Heading ##
-  > DerpyBird Versus Mode. (Loosely) Inspired By FlappyBird.
+  > DerpyBird Versus Mode!
 
 ## Sub-Heading ##
-  > FlappyBird meets RaidenX with a competitve twist!
+  > (Loosely) Inspired By FlappyBird.
 
 ## Summary ##
   > A competitive multiplayer twist on FlappyBird!
