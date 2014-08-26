@@ -4,11 +4,11 @@ var CANVAS_WIDTH = 1000;
 var playerTwo = {
   x: 900,
   y: 300,
+  lives: 4,
   width: 60, 
   height: 66,
-  active: true,
   magazine: 20,
-  playable: false,
+  playable: true,
   hasBullets: true,
   draw: function() {
     canvas.fillRect(this.x, this.y, this.width, this.height);
@@ -20,6 +20,7 @@ var playerTwoBullets = [];
 function TwoBullet(J) {
   J.active = true;
 
+  J.source = playerTwo;
   J.xVelocity = -J.speed;
   J.yVelocity = 0;
   J.width = 5;
@@ -58,42 +59,42 @@ setInterval(function() {
 }, 1500);
 
 playerTwo.update = function() {
-  if (keydown.space && this.hasBullets) {
-    this.shoot();
-  }
-  if (keydown.left) {
-    console.log('moving left');
-    this.x -= 5;
-  }
-  if (keydown.right) {
-    console.log('moving right');
-    this.x += 5;
-  }
-  if (keydown.up) {
-    console.log('moving up');
-    this.y -= 5;
-  }
-  if (keydown.down) {
-    console.log('moving down');
-    this.y += 5;
-  }
+  if (this.playable) {
+    if (keydown.space && this.hasBullets) {
+      this.shoot();
+    }
+    if (keydown.left) {
+      console.log('moving left');
+      this.x -= 5;
+    }
+    if (keydown.right) {
+      console.log('moving right');
+      this.x += 5;
+    }
+    if (keydown.up) {
+      console.log('moving up');
+      this.y -= 5;
+    }
+    if (keydown.down) {
+      console.log('moving down');
+      this.y += 5;
+    }
 
-  this.x = this.x.clamp(CANVAS_WIDTH / 2, 1000);
-  this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height);
+    this.x = this.x.clamp(CANVAS_WIDTH / 2, 1000 - this.width);
+    this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height);
 
-  playerTwoBullets.forEach(function(bullet) {
-    bullet.update();
-  });
+    playerTwoBullets.forEach(function(bullet) {
+      bullet.update();
+    });
 
-  playerTwoBullets = playerTwoBullets.filter(function(bullet) {
-    return bullet.active;
-  });
-
-  // handleCollisions();
-}
+    playerTwoBullets = playerTwoBullets.filter(function(bullet) {
+      return bullet.active;
+    });
+  }
+};
 
 playerTwo.shoot = function() {
-  console.log('player two shooting');
+  Sound.play("shoot");
   var bulletPosition = this.midPoint();
 
   playerTwoBullets.push(TwoBullet ({
@@ -114,12 +115,18 @@ playerTwo.midPoint = function() {
 };
 
 playerTwo.explode = function() {
-  this.active = false;
+  Sound.play("explosion");
+  if (this.lives > 0) { this.lives--; }
+  else { 
+    this.playable = false; 
+    // gameOver();
+  }
 };
 
 playerTwo.sprite = Sprite("ship2");
 
 playerTwo.draw = function() {
-  this.playable = true;
-  this.sprite.draw(context, this.x, this.y);
+  if (this.playable) {
+    this.sprite.draw(context, this.x, this.y);
+  }
 };

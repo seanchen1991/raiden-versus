@@ -4,11 +4,11 @@ var CANVAS_WIDTH = 1000;
 var playerOne = {
   x: 100,
   y: 300,
+  lives: 4,
   width: 60,
   height: 91,
-  active: true,
   magazine: 20,
-  playable: false,
+  playable: true,
   hasBullets: true,
   draw: function() {
     canvas.fillRect(this.x, this.y, this.width, this.height);
@@ -20,6 +20,7 @@ var playerOneBullets = [];
 function OneBullet(I) {
   I.active = true;
 
+  I.source = playerOne;
   I.xVelocity = -I.speed;
   I.yVelocity = 0;
   I.width = 5;
@@ -58,48 +59,38 @@ setInterval(function() {
 }, 1500);
 
 playerOne.update = function() {
-  if (keydown.c && this.hasBullets) {
-    this.shoot();
+  if (this.playable) {
+    if (keydown.c && this.hasBullets) {
+      this.shoot();
+    }
+    if (keydown.a) {
+      this.x -= 5;
+    }
+    if (keydown.d) {
+      this.x += 5; 
+    }
+    if (keydown.w) {
+      this.y -= 5;
+    }
+    if (keydown.s) {
+      this.y += 5;
+    }
+
+    this.x = this.x.clamp(0, CANVAS_WIDTH / 2 - this.width);
+    this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height);
+
+    playerOneBullets.forEach(function(bullet) {
+      bullet.update();
+    });
+
+    playerOneBullets = playerOneBullets.filter(function(bullet) {
+      return bullet.active;
+    });
   }
-  if (keydown.a) {
-    this.x -= 5;
-  }
-  if (keydown.d) {
-    this.x += 5; 
-  }
-  if (keydown.w) {
-    this.y -= 5;
-  }
-  if (keydown.s) {
-    this.y += 5;
-  }
-
-  this.x = this.x.clamp(0, CANVAS_WIDTH / 2 - this.width);
-  this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height);
-
-  playerOneBullets.forEach(function(bullet) {
-    bullet.update();
-  });
-
-  playerOneBullets = playerOneBullets.filter(function(bullet) {
-    return bullet.active;
-  });
-
-
-/*    powerUps.forEach(function(powerUp) {
-    powerUp.update();
-  });
-
-  powerUps = powerUps.filter(function(powerUp) {
-    return powerUp.active;
-  });*/
-
-  // handleCollisions();
-
-}
+};
 
 playerOne.shoot = function() {
-  // Sound.play("shoot");
+  Sound.play("shoot");
   var bulletPosition = this.midPoint();
 
   playerOneBullets.push(OneBullet ({
@@ -122,15 +113,28 @@ playerOne.midPoint = function () {
 
 
 playerOne.explode = function() {
-  this.active = false;
+  Sound.play("explosion");
+  if (this.lives > 0) { this.lives--; }
+  else { 
+    this.playable = false;
+    // gameOver();
+  }
 };
 
 playerOne.sprite = Sprite("ship1");
 
 playerOne.draw = function() {
-  this.playable = true;
-  this.sprite.draw(context, this.x, this.y);
+  if (this.playable) {
+    this.sprite.draw(context, this.x, this.y);
+  }
 };
+
+/*playerOne.drawScore = function() {
+  context.clearRect(0, 0, 150, 150);
+  context.font = "40px sans-serif";
+  context.fillStyle = 'red';
+  context.fillText(this.lives, 100, 100);
+};*/
 
 //TODO: Add game over functionality
 
