@@ -1,7 +1,3 @@
-var CANVAS_HEIGHT = 600;
-var CANVAS_WIDTH = 1000;
-var FPS = 30;
-
 var playerOne = {
   x: 100,
   y: CANVAS_HEIGHT / 2,
@@ -16,19 +12,7 @@ var playerOne = {
   }
 };
 
-/*  var playerTwo = {
-  x: 900,
-  y: CANVAS_HEIGHT / 2,
-  width:
-  height:
-  playable: false,
-  draw: function() {
-    canvas.fillRect(this.x, this.y, this.width, this.height);
-  }
-};*/
-
 var playerOneBullets = [];
-// var playerTwoBullets = [];
 
 function OneBullet(I) {
   I.active = true;
@@ -69,8 +53,7 @@ setInterval(function() {
 }, 1000/FPS);
 
 setInterval(function() {
-  console.log(playerOne.magazine);
-  if (playerOne.magazine < 10 && playerOne.magazine >= 0) {
+  if (playerOne.magazine < 20 && playerOne.magazine >= 0) {
     playerOne.magazine++;
   }
   if (playerOne.magazine >= 0) { playerOne.hasBullets = true; }
@@ -186,18 +169,9 @@ playerOne.explode = function() {
 playerOne.sprite = Sprite("ship1");
 
 playerOne.draw = function() {
-  playable = true;
+  this.playable = true;
   this.sprite.draw(context, this.x, this.y);
 };
 
 //TODO: Add game over functionality
 
-/*  playerTwo.explode = function() {
-  this.active = false;
-};
-
-playerTwo.sprite = Sprite("player2");
-
-playerTwo.draw = function() {
-  this.sprite.draw(context, this.x, this.y);
-};*/
