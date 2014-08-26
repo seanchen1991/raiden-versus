@@ -21,67 +21,16 @@
     alert("You must use a browser that supports HTML5 Canvas to run this game.");
 
 
-/*  function start() {
-    var birdRef = new Firebase('https://nvdozxznr9j.firebaseio-demo.com/');
-    var derpyBirdController = new DerpyBird.Controller(birdRef);
-  }*/
+  var CANVAS_HEIGHT = 600;
+  var CANVAS_WIDTH = 1000;
 
-  var DerpyBird = {};
+/*  var FPS = 30;
+  setInterval(function() {
+    update();
+    draw();
+  }, 1000/FPS);*/
 
-  DerpyBird.HEIGHT = $('#canvas')[0].height();
-  DerpyBird.WIDTH = $('#canvas')[0].width();
-  DerpyBird.GRAVITY_DELAY;
-  DerpyBird.context;
-  
-  var x1 = 75;
-  var y1 = 170;
-  var x2 = 875;
-  var y2 = 170;
-  var dy1 = 2;
-  var dy2 = 2;
-  var context;
 
-  var init = function() {
-    context = $('#canvas')[0].getContext('2d');
-    HEIGHT = $('#canvas').height();
-    WIDTH = $('#canvas').width();
-    return setInterval(draw, 5);
-  };
-
-  var clear = function() {
-    context.clearRect(0, 0, WIDTH, HEIGHT);
-  };
-
-  var drawBirdOne = function(x, y) {
-    var birdOne = new Image();
-    birdOne.src = "images/DerpyBird.png";
-    birdOne.onload = function() {
-      context.drawImage(birdOne, x, y);
-    };
-  };
-
-  var drawBirdTwo = function(x, y) {
-    var birdTwo = new Image();
-    birdTwo.src = "images/DerpyBird2.png";
-    birdTwo.onload = function() {
-      context.drawImage(birdTwo, x, y);
-    };
-  };
-
-  var draw = function() {
-    console.log(dy1, dy2);
-    clear();
-    drawBirdOne(x1, y1);
-    drawBirdTwo(x2, y2);
-
-    if (y1 + dy1 >= HEIGHT - 30 || y1 + dy1 < -15) { dy1 = 0; }
-    if (y2 + dy2 >= HEIGHT - 30 || y2 + dy2 < -15) { dy2 = 0; }
-
-    y1 += dy1;
-    y2 += dy2;
-  };
-
-  init();
 
 
 </script>
