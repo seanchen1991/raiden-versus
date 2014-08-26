@@ -1,6 +1,7 @@
 var DerpyBird = function() {
   this.timeout;
   this.altitude;
+  this.lives = 3;
   this.speed = 0;
   this.gravity = 1;
   this.flap = -15;
@@ -32,3 +33,31 @@ DerpyBird.prototype.dead = function() {
 };
 
 DerpyBird.prototype.rotation = function() {};
+
+DerpyBird.BirdOne = function() {
+  new DerpyBird();
+  this.drawBirdOne();
+};
+
+DerpyBird.BirdTwo = function() {
+  new DerpyBird();
+  this.drawBirdTwo();
+};
+
+DerpyBird.BirdOne.prototype.drawBirdOne = function() {
+  var context = $('#canvas')[0].getContext('2d');
+  var birdOne = new Image();
+  birdOne.src = "images/DerpyBird.png";
+  birdOne.onload = function() {
+    context.drawImage(birdOne, 75, 170);
+  }; 
+};
+
+DerpyBird.BirdTwo.prototype.drawBirdTwo = function() {
+  var context = $('#canvas')[0].getContext('2d');
+  var birdTwo = new Image();
+  birdTwo.src = "images/DerpyBird2.png";
+  birdTwo.onload = function() {
+    context.drawImage(birdTwo, 875, 170);
+  };
+};

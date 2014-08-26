@@ -1,9 +1,10 @@
 <html>
 <head>
-  <script src="src/DerpyBird.js"></script>
   <script src="https://cdn.firebase.com/js/client/1.0.15/firebase.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <!--script src="src/DerpyBird.js"></script>
+  <script src="src/init.js"></script-->
 </head>
 
 <body class="bird-body example-base">
@@ -13,51 +14,75 @@
 <!--   <input type="button" id="restartButton" value="Restart Game" class="hide" />
   <div id="gameInProgress">Game is in progress.  You will automatically join if either player leaves.</div> -->
 
-
 <script>
 
   var canvas = $("#canvas").get(0);
   if (!canvas || !canvas.getContext || !canvas.getContext('2d'))
     alert("You must use a browser that supports HTML5 Canvas to run this game.");
 
-  function start() {
-    new DerpyBird.Controller();
-  }
 
-  DerpyBird.Controller = function() {
-    new DerpyBird.BirdOne();
-    new DerpyBird.BirdTwo();
+/*  function start() {
+    var birdRef = new Firebase('https://nvdozxznr9j.firebaseio-demo.com/');
+    var derpyBirdController = new DerpyBird.Controller(birdRef);
+  }*/
+
+  var DerpyBird = {};
+
+  DerpyBird.HEIGHT = $('#canvas')[0].height();
+  DerpyBird.WIDTH = $('#canvas')[0].width();
+  DerpyBird.GRAVITY_DELAY;
+  DerpyBird.context;
+  
+  var x1 = 75;
+  var y1 = 170;
+  var x2 = 875;
+  var y2 = 170;
+  var dy1 = 2;
+  var dy2 = 2;
+  var context;
+
+  var init = function() {
+    context = $('#canvas')[0].getContext('2d');
+    HEIGHT = $('#canvas').height();
+    WIDTH = $('#canvas').width();
+    return setInterval(draw, 5);
   };
 
-  DerpyBird.BirdOne = function() {
-    new DerpyBird();
-    this.drawBirdOne();
+  var clear = function() {
+    context.clearRect(0, 0, WIDTH, HEIGHT);
   };
 
-  DerpyBird.BirdTwo = function() {
-    new DerpyBird();
-    this.drawBirdTwo();
-  };
-
-  DerpyBird.BirdOne.prototype.drawBirdOne = function() {
-    var context = $('#canvas')[0].getContext('2d');
+  var drawBirdOne = function(x, y) {
     var birdOne = new Image();
     birdOne.src = "images/DerpyBird.png";
     birdOne.onload = function() {
-      context.drawImage(birdOne, 75, 170);
-    }; 
-  };
-
-  DerpyBird.BirdTwo.prototype.drawBirdTwo = function() {
-    var context = $('#canvas')[0].getContext('2d');
-    var birdTwo = new Image();
-    birdTwo.src = "images/DerpyBird2.png";
-    birdTwo.onload = function() {
-      context.drawImage(birdTwo, 875, 170);
+      context.drawImage(birdOne, x, y);
     };
   };
 
-  start();
+  var drawBirdTwo = function(x, y) {
+    var birdTwo = new Image();
+    birdTwo.src = "images/DerpyBird2.png";
+    birdTwo.onload = function() {
+      context.drawImage(birdTwo, x, y);
+    };
+  };
+
+  var draw = function() {
+    console.log(dy1, dy2);
+    clear();
+    drawBirdOne(x1, y1);
+    drawBirdTwo(x2, y2);
+
+    if (y1 + dy1 >= HEIGHT - 30 || y1 + dy1 < -15) { dy1 = 0; }
+    if (y2 + dy2 >= HEIGHT - 30 || y2 + dy2 < -15) { dy2 = 0; }
+
+    y1 += dy1;
+    y2 += dy2;
+  };
+
+  init();
+
 
 </script>
 </body>
