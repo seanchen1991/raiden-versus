@@ -1,6 +1,9 @@
+var CANVAS_HEIGHT = 600;
+var CANVAS_WIDTH = 1000;
+
 var playerOne = {
   x: 100,
-  y: CANVAS_HEIGHT / 2,
+  y: 300,
   width: 60,
   height: 91,
   active: true,
@@ -48,36 +51,31 @@ function OneBullet(I) {
 }
 
 setInterval(function() {
-  update();
-  draw();
-}, 1000/FPS);
-
-setInterval(function() {
   if (playerOne.magazine < 20 && playerOne.magazine >= 0) {
     playerOne.magazine++;
   }
   if (playerOne.magazine >= 0) { playerOne.hasBullets = true; }
 }, 1500);
 
-function update() {
-  if (keydown.space && playerOne.hasBullets) {
-    playerOne.shoot();
+playerOne.update = function() {
+  if (keydown.c && this.hasBullets) {
+    this.shoot();
   }
-  if (keydown.left) {
-    playerOne.x -= 5;
+  if (keydown.a) {
+    this.x -= 5;
   }
-  if (keydown.right) {
-    playerOne.x += 5; 
+  if (keydown.d) {
+    this.x += 5; 
   }
-  if (keydown.up) {
-    playerOne.y -= 5;
+  if (keydown.w) {
+    this.y -= 5;
   }
-  if (keydown.down) {
-    playerOne.y += 5;
+  if (keydown.s) {
+    this.y += 5;
   }
 
-  playerOne.x = playerOne.x.clamp(0, CANVAS_WIDTH / 2 - playerOne.width);
-  playerOne.y = playerOne.y.clamp(0, CANVAS_HEIGHT - playerOne.height);
+  this.x = this.x.clamp(0, CANVAS_WIDTH / 2 - this.width);
+  this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height);
 
   playerOneBullets.forEach(function(bullet) {
     bullet.update();
@@ -122,45 +120,6 @@ playerOne.midPoint = function () {
   };
 };
 
-function draw() {
-  context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-  playerOne.draw();
-  // playerTwo.draw();
-
-  playerOneBullets.forEach(function(bullet) {
-    bullet.draw();
-  });
-
-/*    playerTwoBullets.forEach(function(bullet) {
-    bullet.draw();
-  });*/
-
-/*    powerUps.forEach(function(powerUp) {
-    powerUp.draw();
-  });*/
-}
-
-function collides(a, b) {
-  return a.x < b.x + b.width &&
-  a.x + a.width > b.x &&
-  a.y < b.y + b.height &&
-  a.y + a.height > b.y;
-}
-
-/*  function handleCollisions() {
-  playerOneBullets.forEach(function(bullet) {
-    if (collides(bullet, playerTwo) {
-      playerTwo.explode();
-      bullet.active = false;
-    })
-  });
-  playerTwoBullets.forEach(function(bullet) {
-    if (collides(bullet, playerOne) {
-      playerOne.explode();
-      bullet.active = false;
-    })
-  });
-}*/
 
 playerOne.explode = function() {
   this.active = false;

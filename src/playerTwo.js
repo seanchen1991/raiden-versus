@@ -1,8 +1,11 @@
+var CANVAS_HEIGHT = 600;
+var CANVAS_WIDTH = 1000;
+
 var playerTwo = {
   x: 900,
-  y: CANVAS_HEIGHT / 2,
+  y: 300,
   width: 60, 
-  heigh: 66,
+  height: 66,
   active: true,
   magazine: 20,
   playable: false,
@@ -48,36 +51,35 @@ function TwoBullet(J) {
 }
 
 setInterval(function() {
-  update();
-  draw();
-}, 1000/FPS);
-
-setInterval(function() {
   if (playerTwo.magazine < 20 && playerTwo.magazine >= 0) {
     playerTwo.magazine++;
   }
   if (playerTwo.magazine >= 0) { playerTwo.hasBullets = true; }
 }, 1500);
 
-function update() {
-  if (keydown.space && playerTwo.hasBullets) {
-    playerTwo.shoot();
+playerTwo.update = function() {
+  if (keydown.space && this.hasBullets) {
+    this.shoot();
   }
   if (keydown.left) {
-    playerTwo.x -= 5;
+    console.log('moving left');
+    this.x -= 5;
   }
   if (keydown.right) {
-    playerTwo.x += 5;
+    console.log('moving right');
+    this.x += 5;
   }
   if (keydown.up) {
-    playerTwo.y -= 5;
+    console.log('moving up');
+    this.y -= 5;
   }
   if (keydown.down) {
-    playerTwo.y += 5;
+    console.log('moving down');
+    this.y += 5;
   }
 
-  playerTwo.x = playerTwo.x.clamp(CANVAS_WIDTH / 2, 1000);
-  playerTwo.y = playerTwo.y.clamp(0, CANVAS_HEIGHT - playerTwo.height);
+  this.x = this.x.clamp(CANVAS_WIDTH / 2, 1000);
+  this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height);
 
   playerTwoBullets.forEach(function(bullet) {
     bullet.update();
@@ -91,6 +93,7 @@ function update() {
 }
 
 playerTwo.shoot = function() {
+  console.log('player two shooting');
   var bulletPosition = this.midPoint();
 
   playerTwoBullets.push(TwoBullet ({

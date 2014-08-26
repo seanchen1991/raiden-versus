@@ -23,12 +23,55 @@
 
   var canvas = $("#canvas").get(0);
   var context = canvas.getContext('2d');
+  var FPS = 30;
   if (!canvas || !canvas.getContext || !canvas.getContext('2d'))
     alert("You must use a browser that supports HTML5 Canvas to run this game.");
 
-  var CANVAS_HEIGHT = 600;
-  var CANVAS_WIDTH = 1000;
-  var FPS = 30;
+  function draw() {
+    context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    playerOne.draw();
+    playerTwo.draw();
+
+    playerOneBullets.forEach(function(bullet) {
+      bullet.draw();
+    });
+
+    playerTwoBullets.forEach(function(bullet) {
+      bullet.draw();
+    });
+
+/*  powerUps.forEach(function(powerUp) {
+    powerUp.draw();
+  });*/
+  }
+
+  function collides(a, b) {
+    return a.x < b.x + b.width &&
+    a.x + a.width > b.x &&
+    a.y < b.y + b.height &&
+    a.y + a.height > b.y;
+  }
+
+/*  function handleCollisions() {
+  playerOneBullets.forEach(function(bullet) {
+    if (collides(bullet, playerTwo) {
+      playerTwo.explode();
+      bullet.active = false;
+    })
+  });
+  playerTwoBullets.forEach(function(bullet) {
+    if (collides(bullet, playerOne) {
+      playerOne.explode();
+      bullet.active = false;
+    })
+  });
+}*/
+
+  setInterval(function() {
+    playerOne.update();
+    playerTwo.update();
+    draw();
+  }, 1000/FPS);
 
 </script>
 </body>
