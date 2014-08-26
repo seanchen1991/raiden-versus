@@ -1,4 +1,4 @@
-# DerpyBird Versus Mode! #
+# Raiden Versus Mode! #
   
 <!-- 
 
@@ -13,25 +13,25 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
  -->
  
 ## Heading ##
-  > DerpyBird Versus Mode!
+  > Raiden Versus Mode!
 
 ## Sub-Heading ##
-  > (Loosely) Inspired By FlappyBird.
+  > (Loosely) Inspired By RaidenX.
 
 ## Summary ##
-  > A competitive multiplayer twist on FlappyBird!
+  > A competitive multiplayer twist on a classic space shooter game!
 
 ## Problem ##
-  > No longer will you ever have to play FlappyBird by yourself!
+  > No longer will you ever have to play RaidenX by yourself!
 
 ## Solution ##
-  > Two player FlappyBird implemented mainly using Firebase.
+  > Two player space shooter game implemented mainly using Firebase.
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
 
 ## How to Get Started ##
-  > Both players press the spacebar!
+  > Both players start shooting each other!
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.

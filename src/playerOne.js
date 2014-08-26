@@ -7,6 +7,7 @@ var playerOne = {
   y: CANVAS_HEIGHT / 2,
   width: 60,
   height: 91,
+  active: true,
   magazine: 20,
   playable: false,
   hasBullets: true,
@@ -188,6 +189,8 @@ playerOne.draw = function() {
   playable = true;
   this.sprite.draw(context, this.x, this.y);
 };
+
+//TODO: Add game over functionality
 
 /*  playerTwo.explode = function() {
   this.active = false;
