@@ -30,15 +30,28 @@
   var FPS = 30;
 
   var playerOne = {
-    color: "#00A",
     x: 100,
     y: CANVAS_HEIGHT / 2,
     width: 60,
-    height: 60,
+    height: 91,
+    magazine: 10,
+    playable: false,
+    hasBullets: true,
     draw: function() {
       canvas.fillRect(this.x, this.y, this.width, this.height);
     }
   };
+
+/*  var playerTwo = {
+    x: 900,
+    y: CANVAS_HEIGHT / 2,
+    width:
+    height:
+    playable: false,
+    draw: function() {
+      canvas.fillRect(this.x, this.y, this.width, this.height);
+    }
+  };*/
 
   var playerOneBullets = [];
   // var playerTwoBullets = [];
@@ -50,7 +63,6 @@
     I.yVelocity = 0;
     I.width = 5;
     I.height = 5;
-    I.color = "#000";
 
     I.inBounds = function() {
       return I.y >= 0 && I.y <= CANVAS_WIDTH && 
@@ -83,7 +95,7 @@
   }, 1000/FPS);
 
   function update() {
-    if (keydown.space) {
+    if (keydown.space && playerOne.hasBullets) {
       playerOne.shoot();
     }
     if (keydown.left) {
@@ -99,7 +111,7 @@
       playerOne.y += 5;
     }
 
-    playerOne.x = playerOne.x.clamp(0, CANVAS_WIDTH / 2);
+    playerOne.x = playerOne.x.clamp(0, CANVAS_WIDTH / 2 - playerOne.width);
     playerOne.y = playerOne.y.clamp(0, CANVAS_HEIGHT - playerOne.height);
 
     playerOneBullets.forEach(function(bullet) {
@@ -131,6 +143,18 @@
       x: bulletPosition.x,
       y: bulletPosition.y
     }));
+    if (this.magazine === 0) { this.hasBullets = false; }
+    else { this.hasBullets = true; }
+    if (this.hasBullets) { this.magazine--; }
+    console.log(this.magazine);
+  };
+
+  playerOne.checkForRecharge = function() {
+    setInterval(function() {
+      if (this.magazine < 10 && this.magazine >= 0) {
+        this.magazine++;
+      }
+    }, 3000);
   };
 
   playerOne.midPoint = function () {
@@ -187,6 +211,7 @@
   playerOne.sprite = Sprite("ship1");
 
   playerOne.draw = function() {
+    playable = true;
     this.sprite.draw(context, this.x, this.y);
   };
 
