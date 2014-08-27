@@ -76,7 +76,7 @@
       if (collides(powerUp, playerOne)) {
         Sound.play("powerup");
         powerUp.active = false;
-        playerOne.lives++;
+        // playerOne.burst();
       }
     });
     powerUps.forEach(function(powerUp) {
