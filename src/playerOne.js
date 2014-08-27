@@ -20,7 +20,6 @@ var playerOneBullets = [];
 function OneBullet(I) {
   I.active = true;
 
-  I.source = playerOne;
   I.xVelocity = -I.speed;
   I.yVelocity = 0;
   I.width = 5;

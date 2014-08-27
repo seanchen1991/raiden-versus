@@ -20,7 +20,6 @@ var playerTwoBullets = [];
 function TwoBullet(J) {
   J.active = true;
 
-  J.source = playerTwo;
   J.xVelocity = -J.speed;
   J.yVelocity = 0;
   J.width = 5;
@@ -64,19 +63,15 @@ playerTwo.update = function() {
       this.shoot();
     }
     if (keydown.left) {
-      console.log('moving left');
       this.x -= 5;
     }
     if (keydown.right) {
-      console.log('moving right');
       this.x += 5;
     }
     if (keydown.up) {
-      console.log('moving up');
       this.y -= 5;
     }
     if (keydown.down) {
-      console.log('moving down');
       this.y += 5;
     }
 

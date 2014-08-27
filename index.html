@@ -72,6 +72,40 @@
         bullet.active = false;
       }
     });
+    powerUps.forEach(function(powerUp) {
+      if (collides(powerUp, playerOne)) {
+        Sound.play("powerup");
+        powerUp.active = false;
+        playerOne.lives++;
+      }
+    });
+    powerUps.forEach(function(powerUp) {
+      if (collides(powerUp, playerTwo)) {
+        Sound.play("powerup");
+        powerUp.active = false;
+        playerTwo.lives++;
+      }
+    });
+    powerUps.forEach(function(powerUp) {
+      playerOneBullets.forEach(function(bullet) {
+        if (collides(powerUp, bullet)) {
+          Sound.play("powerup");
+          powerUp.active = false;
+          bullet.active = false;
+          playerOne.lives++;
+        }
+      });
+    });
+    powerUps.forEach(function(powerUp) {
+      playerTwoBullets.forEach(function(bullet) {
+        if (collides(powerUp, bullet)) {
+          Sound.play("powerup");
+          powerUp.active = false;
+          bullet.active = false;
+          playerTwo.lives++;
+        }
+      });
+    });
   }
 
 /*  function gameOver() {
